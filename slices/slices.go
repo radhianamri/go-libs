@@ -126,24 +126,7 @@ func Merge[T comparable](s1, s2 []T) []T {
 	return s1
 }
 
-func Intersect[T comparable](s1, s2 []T) []T {
-	set := make(map[T]bool)
-	var result []T
-
-	for _, v := range s1 {
-		set[v] = true
-	}
-
-	for _, v := range s2 {
-		if set[v] {
-			result = append(result, v)
-		}
-	}
-
-	return result
-}
-
-func FindDuplicates[T comparable](slices ...[]T) []T {
+func Intersect[T comparable](slices ...[]T) []T {
 	if len(slices) == 0 {
 		return nil
 	}

@@ -11,21 +11,6 @@ func Merge[K comparable, V any](m1, m2 map[K]V) map[K]V {
 	return result
 }
 
-func Intersect[K comparable, V any](m1, m2 map[K]V) map[K]V {
-	set := make(map[K]bool)
-	for k, _ := range m1 {
-		set[k] = true
-	}
-
-	result := make(map[K]V)
-	for k, v := range m2 {
-		if set[k] {
-			result[k] = v
-		}
-	}
-	return result
-}
-
 func KeysToSlice[K comparable, V any](m map[K]V) []K {
 	result := make([]K, 0, len(m))
 	for key := range m {
@@ -42,9 +27,9 @@ func ValuesToSlice[K comparable, V any](m map[K]V) []V {
 	return result
 }
 
-func FindDuplicates[K comparable, V any](maps ...map[K]V) []K {
+func Intersect[K comparable, V any](maps ...map[K]V) []K {
 	if len(maps) == 0 {
-		return nil
+		return make([]K, 0)
 	}
 
 	duplicates := make(map[K]bool, len(maps[0]))
