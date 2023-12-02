@@ -1,1 +1,1 @@
-Simple utility functions for Go
+An archive of utility libraries in Go
