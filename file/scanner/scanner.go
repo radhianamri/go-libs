@@ -33,16 +33,16 @@ func New(filename string, maxBufferSize int) (*Scanner, error) {
 
 type LineProcessor struct {
 	Scanner
-	err        error
-	processors []func(*string) error
-	text       string
+	err   error
+	funcs []func(*string) error
+	text  string
 }
 
 func (s *LineProcessor) Scan() bool {
 	if s.Scanner.Scan() && s.err == nil {
 		s.text = s.Scanner.Text()
-		for i := range s.processors {
-			s.err = s.processors[i](&s.text)
+		for i := range s.funcs {
+			s.err = s.funcs[i](&s.text)
 			if s.err != nil {
 				return false
 			}
@@ -79,6 +79,6 @@ func NewLineProcesser(filename string, maxBufferSize int, lineProcessors ...func
 			File:    f,
 			Scanner: scanner,
 		},
-		processors: lineProcessors,
+		funcs: lineProcessors,
 	}, nil
 }

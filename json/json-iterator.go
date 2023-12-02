@@ -1,8 +1,15 @@
 package json
 
-import jsoniter "github.com/json-iterator/go"
+import (
+	jsoniter "github.com/json-iterator/go"
+)
 
-var Json = jsoniter.ConfigCompatibleWithStandardLibrary
+var Json = jsoniter.Config{
+	EscapeHTML:             false,
+	UseNumber:              true,
+	SortMapKeys:            true,
+	ValidateJsonRawMessage: true,
+}.Froze()
 
 func Unmarshal(body []byte, v interface{}) error {
 	return Json.Unmarshal(body, v)
